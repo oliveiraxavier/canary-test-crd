@@ -2,7 +2,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  argocd.argoproj.io/sync-options: Prune=false
+  annotations:
+    argocd.argoproj.io/skip-reconcile: "true"
   labels:
     run-type: stable
     app: nginx
@@ -63,7 +64,8 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  argocd.argoproj.io/sync-options: Prune=false
+  annotations:
+    argocd.argoproj.io/skip-reconcile: "true"
   name: nginx-vs
 spec:
   hosts:
