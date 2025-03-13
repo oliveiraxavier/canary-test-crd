@@ -1,7 +1,8 @@
 apiVersion: mox.app.br/v1alpha1
 kind: CanaryDeployment
-
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
   labels:
     app.kubernetes.io/managed-by: kustomize
   name: canarydeployment-1
