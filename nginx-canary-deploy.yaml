@@ -1,0 +1,26 @@
+apiVersion: mox.app.br/v1alpha1
+kind: CanaryDeployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: kustomize
+  name: canarydeployment-1
+spec:
+  appName: nginx
+  stable: "1.26-alpine"
+  canary: "1.27-alpine"
+  configMapNames:
+  - nginx-new1-env
+  - nginx-new2-env
+  istioVirtualServiceName: nginx-vs
+  secretNames:
+  - nginx-secret-new
+  steps:
+  - setWeight: 10
+    pause: {seconds: 60}
+  - setWeight: 20
+    pause: {seconds: 60}
+  - setWeight: 45
+    pause: {seconds: 60}
+  - setWeight: 70
+    pause: {minutes: 2}
+  - setWeight: 100
